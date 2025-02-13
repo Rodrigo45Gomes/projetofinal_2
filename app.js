@@ -12,6 +12,7 @@ const NOME_TABELA = "songs"
 // Middleware para parse de JSON no corpo dos pedidos
 app.use(express.json());
 
+app.set('view engine', 'ejs')
 // Criar o servidor HTTP
 app.listen(port, () => {
   console.log(`Example app listening on http://localhost:${port}`)
@@ -59,6 +60,12 @@ const bands = [
               ]
 
 /* ENDPOINTS DA API */
+
+app.get('/', (req, res) => {
+
+  res.render('index')
+
+})
 
 // Rota para listar todas as músicas
 app.get('/api/songs', (req, res) => {
