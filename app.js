@@ -22,7 +22,7 @@ const connection = mysql.createConnection({
   host: '127.0.0.1',       // Endereço do servidor MySQL
   user: 'root',            // user do MySQL
   password: '',            // Senha do MySQL
-  database: 'psi',         // Nome da base de dados
+  database: 'create_songs',         // Nome da base de dados
   port: 3306
 });
 
