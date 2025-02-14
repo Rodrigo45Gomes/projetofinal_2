@@ -61,9 +61,35 @@ const bands = [
 
 /* ENDPOINTS DA API */
 
+
 app.get('/', (req, res) => {
 
   res.render('index')
+
+})
+
+
+app.get('/', (req, res) => {
+
+  res.render('index')
+
+})
+
+app.get('/new-songs', (req, res) => {
+
+  res.render('new-songs')
+
+})
+
+app.get('/songs', (req, res) => {
+
+  res.render('songs')
+
+})
+
+app.get('/price', (req, res) => {
+
+  res.render('price')
 
 })
 
