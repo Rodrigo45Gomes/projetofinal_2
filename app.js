@@ -4,7 +4,7 @@
 const express = require('express')
 const mysql = require('mysql2');
 const app = express()
-
+const axios = require('axios');
 // Constantes do Projeto
 const port = 3000
 const NOME_TABELA = "songs"
@@ -83,15 +83,25 @@ app.get('/new-songs', (req, res) => {
 
 app.get('/songs', (req, res) => {
   
-  res.render('songs',{songs:response.data})
+  axios.get(`http://localhost:${port}/api/songs`)
+  .then(response => {
+      console.log('Success:', response.data);
+      res.render('songs',{songs:response.data})
+      // Handle success (e.g., show a success message, redirect, etc.)
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+      // Handle error (e.g., show an error message)
+  });
+});
 
-})
 
 app.get('/price', (req, res) => {
 
   res.render('price', {preco:pricePerLike})
 
 })
+
 
 // Rota para listar todas as músicas
 app.get('/api/songs', (req, res) => {

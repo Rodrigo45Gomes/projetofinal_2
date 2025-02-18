@@ -16,29 +16,25 @@
         </div>
         <h1>Listagem de músicas disponíveis</h1>
         <div>
+            <table border="1">
+                <tr>
+                    <% for(let i = 0; i < songs.length; i++) { %>
+                    <td><%= songs[i].id %></td>
+                    <td><%= songs[i].title %></td>
+                    <td><%= songs[i].artist %></td>
+                    <td><%= songs[i].genre %></td>
+                    <td><%= songs[i].duration_seconds %></td>
+                    <td><%= songs[i].release_date %></td>
+                    <td><%= songs[i].likes %></td>
+                    <td><%= songs[i].created_at %></td>
+                    <% }; %>
+                </tr>
             
+            </table>
         </div>
     </div>
 
-    <script>
-        document.getElementById('produto-form').addEventListener('submit', function(event) {
-            event.preventDefault();
     
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData.entries());
-    
-            axios.get(`/api/songs`, data)
-            .then(response => {
-                console.log('Success:', response.data);
-                location.reload();
-                // Handle success (e.g., show a success message, redirect, etc.)
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                // Handle error (e.g., show an error message)
-            });
-        });
-    </script>
 
 </body>
 </html>
