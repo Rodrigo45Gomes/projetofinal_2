@@ -9,16 +9,25 @@
 <body>
     <div>
         <div>
-            <a href="http://localhost:3000/"><button>Home</button></a>
-            <a href="http://localhost:3000/songs"><button>Listar músicas</button></a>
-            <a href="http://localhost:3000/new-songs"><button>Adicionar músicas</button></a>
-            <a href="http://localhost:3000/price"><button>Gerir preço por like</button></a>
+            <%- include ('partials/header') %>
         </div>
-        <h1>Listagem de músicas disponíveis</h1>
+        <h1>Listagem de músicas disponíveis:</h1>
         <div>
             <table border="1">
                 <tr>
-                    <% for(let i = 0; i < songs.length; i++) { %>
+        
+                    <td>Id:</td>
+                    <td>Título:</td>
+                    <td>Artista:</td>
+                    <td>Género:</td>
+                    <td>Duração em segundos:</td>
+                    <td>Data de lançamento:</td>
+                    <td>Likes:</td>
+                    <td>Criado em:</td>
+                    
+                </tr>
+                <% for(let i = 0; i < songs.length; i++) { %>
+                <tr>
                     <td><%= songs[i].id %></td>
                     <td><%= songs[i].title %></td>
                     <td><%= songs[i].artist %></td>
@@ -27,14 +36,31 @@
                     <td><%= songs[i].release_date %></td>
                     <td><%= songs[i].likes %></td>
                     <td><%= songs[i].created_at %></td>
-                    <% }; %>
+                    <td><button onclick="delete_1('<%=songs[i].id %>')">Delete</button></td>
                 </tr>
+                <% }; %>
             
             </table>
         </div>
     </div>
 
-    
+<script>
+function delete_1(index){
+                event.preventDefault();
+
+            axios.delete(`/api/songs/${id}`)
+            .then(response => {
+                console.log('Success:', response.data);
+                location.reload();
+                // Handle success (e.g., show a success message, redirect, etc.)
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle error (e.g., show an error message)
+            });
+}
+
+</script>    
 
 </body>
 </html>
