@@ -82,14 +82,14 @@ app.get('/new-songs', (req, res) => {
 })
 
 app.get('/songs', (req, res) => {
-
-  res.render('songs')
+  
+  res.render('songs',{songs:response.data})
 
 })
 
 app.get('/price', (req, res) => {
 
-  res.render('price')
+  res.render('price', {preco:pricePerLike})
 
 })
 
@@ -153,6 +153,7 @@ app.post('/api/songs', (req, res) => {
     res.sendStatus(200);
   });
 });
+
 
 // Rota para atualizar uma música pelo ID
 app.put('/api/songs/:id', (req, res) => {
