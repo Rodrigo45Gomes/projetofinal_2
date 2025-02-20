@@ -45,8 +45,8 @@
     </div>
 
 <script>
-function delete_1(index){
-                event.preventDefault();
+function delete_1(id){
+    
 
             axios.delete(`/api/songs/${id}`)
             .then(response => {
