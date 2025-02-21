@@ -62,45 +62,9 @@ const bands = [
 /* ENDPOINTS DA API */
 
 
-app.get('/', (req, res) => {
-
-  res.render('index')
-
-})
 
 
-app.get('/', (req, res) => {
 
-  res.render('index')
-
-})
-
-app.get('/new-songs', (req, res) => {
-
-  res.render('new-songs')
-
-})
-
-app.get('/songs', (req, res) => {
-  
-  axios.get(`http://localhost:${port}/api/songs`)
-  .then(response => {
-      console.log('Success:', response.data);
-      res.render('songs',{songs:response.data})
-      // Handle success (e.g., show a success message, redirect, etc.)
-  })
-  .catch((error) => {
-      console.error('Error:', error);
-      // Handle error (e.g., show an error message)
-  });
-});
-
-
-app.get('/price', (req, res) => {
-
-  res.render('price', {preco:pricePerLike})
-
-})
 
 
 // Rota para listar todas as músicas
@@ -547,3 +511,41 @@ PARA ADICIONAR PARTE 2
 
 ***/
 
+app.get('/', (req, res) => {
+
+  res.render('index')
+
+})
+
+app.get('/new-songs', (req, res) => {
+
+  res.render('new-songs')
+
+})
+
+app.get('/songs', (req, res) => {
+  
+  axios.get(`http://localhost:${port}/api/songs`)
+  .then(response => {
+      console.log('Success:', response.data);
+      res.render('songs',{songs:response.data})
+      // Handle success (e.g., show a success message, redirect, etc.)
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+      // Handle error (e.g., show an error message)
+  });
+});
+
+
+app.get('/price', (req, res) => {
+
+  res.render('price', {preco:pricePerLike})
+
+})
+
+app.get('/price', (req, res) => {
+
+  res.render('price', {preco:pricePerLike})
+
+})
