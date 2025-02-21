@@ -243,6 +243,21 @@ app.get('/api/price', (req, res) => {
   res.json({price: pricePerLike});  
 });
 
+app.get('/song/:id', (req, res) => {
+  const id = req.params.id;
+  axios.get(`http://localhost:${port}/api/songs/${id}`)
+  .then(response => {
+    res.render ('song', {songs: response.data, id_song: id, price: pricePerLike, likes: response.data[0].likes} );//renderização da pagina com variaveis correspondentes às informações da musica pesquisada
+    console.log('Success:', response.data);
+      // Handle success (e.g., show a success message, redirect, etc.)
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+      // Handle error (e.g., show an error message)
+  });
+});
+
+
 // Rota para obter o preço por like atual
 app.put('/api/price', (req, res) => {
 

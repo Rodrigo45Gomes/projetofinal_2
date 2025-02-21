@@ -3,9 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
 </head>
+
 <body>
+    <div>
+        <%- include ('partials/header') %>
+    </div>
+    <hr>
+    <h1>Música id: <%= id_song %></h1> 
+    <hr>
+    <h2>Receitas: <%= songs[0].likes * price %> €</h2>
+    <hr>
+    <div>
+        <table border="2" id="tabela">
+            <tr>
+    
+                <td>Id:</td>
+                <td>Título:</td>
+                <td>Artista:</td>
+                <td>Género:</td>
+                <td>Duração em segundos:</td>
+                <td>Data de lançamento:</td>
+                <td>Likes:</td>
+                <td>Criado em:</td>
+                
+            </tr>
+            <% for(let i = 0; i < songs.length; i++) { %>
+            <tr>
+                <td><%= songs[i].id %></td>
+                <td><%= songs[i].title %></td>
+                <td><%= songs[i].artist %></td>
+                <td><%= songs[i].genre %></td>
+                <td><%= songs[i].duration_seconds %></td>
+                <td><%= songs[i].release_date %></td>
+                <td><%= songs[i].likes %></td>
+                <td><%= songs[i].created_at %></td>
+                
+            </tr>
+            <% }; %>
+        
+        </table>
+    </div>
+    <hr>
+        <form id="Alterar_song">
+            <label for="title">Título</label>
+            <input type="text" id="title" name="title" required value="<%= songs[0].title %>">
+            <br>
+            <label for="artist">Artista</label>
+            <input type="text" id="artist" name="artist" required value="<%= songs[0].artist %>">
+            <br>
+            <label for="album">Album</label>
+            <input type="text" id="album" name="album" required value="<%= songs[0].album %>">
+            <br>
+            <label for="genre">Genero</label>
+            <input type="text" id="genre" name="genre" required value="<%= songs[0].genre %>">
+            <br>
+            <label for="duration_seconds">Duração(Segundos)</label>
+            <input type="text" id="duration_seconds" name="duration_seconds" required value="<%= songs[0].duration_seconds %>">
+            <br>
+            <label for="release_date">Criado em:</label>
+            <input type="date" name="release_date" id="release_date" required value=" <%= songs[0].release_date %>">
+            <br>
+            <label for="likes">Likes</label>
+            <input type="number" id="likes" name="likes" required value="<%= songs[0].likes %>">
+            <br>
+            <button type="submit">Alterar</button>
+        </form>
+        <hr>
+        <script>
+            document.getElementById('Alterar_song').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+    
+            axios.put(`/api/songs/<%= id_song %>`, data)
+            .then(response => {
+                console.log('Success:', response.data);
+                location.reload();
+                
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+               
+            });
+        });
+        </script>
+
     
 </body>
 </html>
